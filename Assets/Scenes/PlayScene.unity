@@ -1655,10 +1655,10 @@ MonoBehaviour:
   - {fileID: 4058180177583940026, guid: a667dbba45a4c44b5af8bb8e92ff0a5e, type: 3}
   - {fileID: 2488582480108642309, guid: 4641ac14c194c40d3aec5a4ecb852300, type: 3}
   fruitsPrefabs3:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4013885856931568050, guid: cc3171e521e174b5187e9c81951b6987, type: 3}
+  - {fileID: 285088886869360243, guid: 487a954ca0e244757b1e77ab491247a1, type: 3}
+  - {fileID: 4058180177583940026, guid: 64c91df6813a74843b17ba1d37cffedf, type: 3}
+  - {fileID: 2488582480108642309, guid: 3dc22e8ce1bb6486c9f9bef104ff15b0, type: 3}
 --- !u!4 &1283002452
 Transform:
   m_ObjectHideFlags: 0
