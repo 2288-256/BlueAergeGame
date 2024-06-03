@@ -35,6 +35,7 @@ public class FruitsDropper : MonoBehaviour
         fruitsInstance = Instantiate(fruitsPrefab, spawnPosition, Quaternion.identity);
         fruitsInstance.transform.SetParent(transform);
         fruitsInstance.GetComponent<Rigidbody2D>().isKinematic = true;
+        fruitsInstance.tag = "noDrop";
     }
     private void Update()
     {
@@ -109,6 +110,8 @@ public class FruitsDropper : MonoBehaviour
         {
             fruitsInstance.GetComponent<Rigidbody2D>().isKinematic = false;
             fruitsInstance.transform.SetParent(null);
+            //set tag "drop"
+            fruitsInstance.tag = "drop";
             fruitsInstance = null;
             StartCoroutine(HandleFruits(coolTime));
         }

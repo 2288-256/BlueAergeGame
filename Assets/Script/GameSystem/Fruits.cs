@@ -43,9 +43,6 @@ public class Fruits : MonoBehaviour
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.isKinematic = true;
-
-            BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
-            boxCollider.enabled = false;
         });
     }
 
@@ -60,52 +57,60 @@ public class Fruits : MonoBehaviour
         {
             if (otherFruits.fruitsType == fruitsType)
             {
-                if (nextFruitsPrefab != null && my_serial < otherFruits.my_serial)
+                if (gameObject.tag == "drop" && other.gameObject.tag == "drop")
                 {
-                    OnScoreAdded.Invoke(score);
+                    if (nextFruitsPrefab != null && my_serial < otherFruits.my_serial)
+                    {
+                        OnScoreAdded.Invoke(score);
 
-                    isDestroyed = true;
-                    otherFruits.isDestroyed = true;
-                    Destroy(gameObject);
-                    Destroy(other.gameObject);
+                        isDestroyed = true;
+                        otherFruits.isDestroyed = true;
+                        Destroy(gameObject);
+                        Destroy(other.gameObject);
 
-                    Vector3 center = (transform.position + other.transform.position) / 2;
-                    Quaternion rotation = Quaternion.Lerp(transform.rotation, other.transform.rotation, 0.5f);
-                    Fruits next = Instantiate(nextFruitsPrefab, center, rotation);
+                        Vector3 center = (transform.position + other.transform.position) / 2;
+                        Quaternion rotation = Quaternion.Lerp(transform.rotation, other.transform.rotation, 0.5f);
+                        Fruits next = Instantiate(nextFruitsPrefab, center, rotation);
+                        next.tag = "drop";
+                        // ２つの速度の平均をとる
+                        Rigidbody2D nextRb = next.GetComponent<Rigidbody2D>();
+                        Vector3 velocity = (GetComponent<Rigidbody2D>().velocity + other.gameObject.GetComponent<Rigidbody2D>().velocity) / 2;
+                        nextRb.velocity = velocity;
 
-                    // ２つの速度の平均をとる
-                    Rigidbody2D nextRb = next.GetComponent<Rigidbody2D>();
-                    Vector3 velocity = (GetComponent<Rigidbody2D>().velocity + other.gameObject.GetComponent<Rigidbody2D>().velocity) / 2;
-                    nextRb.velocity = velocity;
-
-                    float angularVelocity = (GetComponent<Rigidbody2D>().angularVelocity + other.gameObject.GetComponent<Rigidbody2D>().angularVelocity) / 2;
-                    nextRb.angularVelocity = angularVelocity;
+                        float angularVelocity = (GetComponent<Rigidbody2D>().angularVelocity + other.gameObject.GetComponent<Rigidbody2D>().angularVelocity) / 2;
+                        nextRb.angularVelocity = angularVelocity;
+                    }
+                    else
+                    {
+                        OnScoreAdded.Invoke(score);
+                        Destroy(gameObject);
+                        Destroy(other.gameObject);
+                    }
                 }
                 else
                 {
-                    OnScoreAdded.Invoke(score);
+                    OnGameOver.Invoke();
                     Destroy(gameObject);
-                    Destroy(other.gameObject);
                 }
             }
         }
-    }
-    IEnumerator Start()
-    {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        while (rb.isKinematic)
+        IEnumerator Start()
         {
-            yield return null;
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            while (rb.isKinematic)
+            {
+                yield return null;
+            }
+            yield return new WaitForSeconds(1.0f);
+            if (!isInside)
+            {
+                OnGameOver.Invoke();
+            }
         }
-        yield return new WaitForSeconds(1.0f);
-        if (!isInside)
+        void OnTriggerEnter2D(Collider2D other)
         {
-            OnGameOver.Invoke();
+            isInside = true;
         }
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        isInside = true;
-    }
 
+    }
 }
