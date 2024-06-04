@@ -23,4 +23,8 @@ public class ButtonEvent : MonoBehaviour
     {
         SceneHistory.Instance.Back();
     }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("PlayScene");
+    }
 }
