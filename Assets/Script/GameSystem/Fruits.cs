@@ -94,23 +94,24 @@ public class Fruits : MonoBehaviour
                 }
             }
         }
-        IEnumerator Start()
+    }
+    IEnumerator Start()
+    {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        while (rb.isKinematic)
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            while (rb.isKinematic)
-            {
-                yield return null;
-            }
-            yield return new WaitForSeconds(1.0f);
-            if (!isInside)
-            {
-                OnGameOver.Invoke();
-            }
+            Debug.Log("isKinematic");
+            yield return null;
         }
-        void OnTriggerEnter2D(Collider2D other)
+        Debug.Log("hello");
+        yield return new WaitForSeconds(1.0f);
+        if (!isInside)
         {
-            isInside = true;
+            OnGameOver.Invoke();
         }
-
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        isInside = true;
     }
 }
