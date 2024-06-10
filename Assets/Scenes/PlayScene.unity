@@ -1755,6 +1755,8 @@ MonoBehaviour:
   moveSpeed: 5
   coolTime: 1
   doubleTapTime: 0.5
+  isPaused: 0
+  buttonRectTransform: {fileID: 1562723987}
 --- !u!212 &1154364899
 SpriteRenderer:
   m_ObjectHideFlags: 0
