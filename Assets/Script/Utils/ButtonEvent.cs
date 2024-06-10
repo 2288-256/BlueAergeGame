@@ -47,5 +47,6 @@ public class ButtonEvent : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseGameCanvas.gameObject.SetActive(false);
+        SceneHistory.Instance.LoadScene("StageSelectScene");
     }
 }
