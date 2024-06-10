@@ -35,12 +35,14 @@ public class ButtonEvent : MonoBehaviour
     public void PauseGame()
     {
         Time.timeScale = 0;
+        GameObject.Find("arona").GetComponent<FruitsDropper>().isPaused = true;
         pauseGameCanvas.gameObject.SetActive(true);
     }
     //コンテニュー
     public void ContinueGame()
     {
         Time.timeScale = 1;
+        GameObject.Find("arona").GetComponent<FruitsDropper>().isPaused = false;
         pauseGameCanvas.gameObject.SetActive(false);
     }
     public void ToStageSelect()

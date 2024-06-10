@@ -21,6 +21,8 @@ public class FruitsDropper : MonoBehaviour
     // タップ回数
     private int tapCount = 0;
 
+    public bool isPaused = false;
+
     private void Start()
     {
         StartCoroutine(HandleFruits(coolTime));
@@ -39,6 +41,10 @@ public class FruitsDropper : MonoBehaviour
     }
     private void Update()
     {
+        if (isPaused)
+        {
+            return;
+        }
         if (Input.GetMouseButton(0))
         {
             // Check if the pointer is over a UI element
