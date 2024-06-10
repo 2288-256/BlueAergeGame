@@ -61,7 +61,6 @@ public class FruitsDropper : MonoBehaviour
                     }
                 }
             }
-
             startPos = transform.position;
 
             // Convert mouse position to world position
