@@ -1,9 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+
 
 public class ButtonEvent : MonoBehaviour
 {
+    public Canvas pauseGameCanvas;
+    public static UnityEvent OnGameOver = new UnityEvent();
     public void StartButtonPressed()
     {
         SceneHistory.Instance.LoadScene("StageSelectScene");
@@ -25,6 +29,23 @@ public class ButtonEvent : MonoBehaviour
     }
     public void RestartGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("PlayScene");
+    }
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        pauseGameCanvas.gameObject.SetActive(true);
+    }
+    //コンテニュー
+    public void ContinueGame()
+    {
+        Time.timeScale = 1;
+        pauseGameCanvas.gameObject.SetActive(false);
+    }
+    public void ToStageSelect()
+    {
+        Time.timeScale = 1;
+        pauseGameCanvas.gameObject.SetActive(false);
     }
 }

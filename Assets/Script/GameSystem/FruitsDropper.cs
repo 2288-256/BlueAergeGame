@@ -57,7 +57,13 @@ public class FruitsDropper : MonoBehaviour
                 {
                     if (result.gameObject.name == "Button")
                     {
+                        Debug.Log("Button clicked!");
                         return; // If the button is clicked, do not move
+                    }
+                    else
+                    {
+                        Debug.Log("Button not clicked!");
+                        return;
                     }
                 }
             }
