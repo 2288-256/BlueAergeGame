@@ -100,10 +100,8 @@ public class Fruits : MonoBehaviour
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         while (rb.isKinematic)
         {
-            Debug.Log("isKinematic");
             yield return null;
         }
-        Debug.Log("hello");
         yield return new WaitForSeconds(1.0f);
         if (!isInside)
         {

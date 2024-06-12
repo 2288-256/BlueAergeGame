@@ -20,6 +20,8 @@ public class FruitsDropper : MonoBehaviour
 
     // タップ回数
     private int tapCount = 0;
+
+    public bool isPaused = false;
     public RectTransform buttonRectTransform;
     private void Start()
     {
@@ -39,6 +41,10 @@ public class FruitsDropper : MonoBehaviour
     }
     private void Update()
     {
+        if (isPaused)
+        {
+            return;
+        }
         if (Input.GetMouseButton(0))
         {
             Vector3 mousePos = Input.mousePosition;
