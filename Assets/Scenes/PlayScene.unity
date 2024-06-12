@@ -4835,6 +4835,14 @@ MonoBehaviour:
   m_ReverseArrangement: 0
 --- !u!114 &1757535191
 MonoBehaviour:
+  randomFruitsSelector: {fileID: 1283002451}
+  moveSpeed: 5
+  coolTime: 1
+  doubleTapTime: 0.5
+  isPaused: 0
+  buttonRectTransform: {fileID: 1562723987}
+--- !u!212 &1154364899
+SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}

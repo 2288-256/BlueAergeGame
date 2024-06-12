@@ -22,7 +22,7 @@ public class FruitsDropper : MonoBehaviour
     private int tapCount = 0;
 
     public bool isPaused = false;
-
+    public RectTransform buttonRectTransform;
     private void Start()
     {
         StartCoroutine(HandleFruits(coolTime));
@@ -47,37 +47,14 @@ public class FruitsDropper : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
-            // Check if the pointer is over a UI element
-            if (EventSystem.current.IsPointerOverGameObject())
+            Vector3 mousePos = Input.mousePosition;
+            if (RectTransformUtility.RectangleContainsScreenPoint(buttonRectTransform, mousePos, Camera.main))
             {
-                // Get the game object under the pointer
-                PointerEventData pointerData = new PointerEventData(EventSystem.current)
-                {
-                    position = Input.mousePosition
-                };
-
-                List<RaycastResult> raycastResults = new List<RaycastResult>();
-                EventSystem.current.RaycastAll(pointerData, raycastResults);
-
-                foreach (RaycastResult result in raycastResults)
-                {
-                    if (result.gameObject.name == "Button")
-                    {
-                        Debug.Log("Button clicked!");
-                        return; // If the button is clicked, do not move
-                    }
-                    else
-                    {
-                        Debug.Log("Button not clicked!");
-                        return;
-                    }
-                }
+                return;
             }
-
             startPos = transform.position;
 
             // Convert mouse position to world position
-            Vector3 mousePos = Input.mousePosition;
             mousePos.z = -Camera.main.transform.position.z; // Set z position to distance from camera to world
             worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
